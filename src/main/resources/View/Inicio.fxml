@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="Principal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="764.0" style="-fx-background-color: #403C75#403C75 #403C75#403C75;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.InicioController">
+   <children>
+      <ImageView fx:id="Imagen" fitHeight="429.0" fitWidth="610.0" layoutX="183.0" layoutY="71.0" opacity="0.23">
+         <image>
+            <Image url="@../Imagenes/Vista.jpg" />
+         </image>
+      </ImageView>
+      <Label layoutX="214.0" prefHeight="73.0" prefWidth="553.0" style="-fx-background-color: #755E3C#755E3C #755E3C#755E3C #755E3C#755E3C #755E3C#755E3C;" />
+      <VBox layoutX="1.0" layoutY="-1.0" prefHeight="481.0" prefWidth="206.0" style="-fx-background-color: #FFFEFD#FFFEFD; -fx-border-color: #755E3C #755E3C;">
+         <children>
+            <Button fx:id="UpdateAccount" alignment="BOTTOM_LEFT" graphicTextGap="15.0" mnemonicParsing="false" onAction="#UpdateAccount" prefHeight="46.0" prefWidth="234.0" style="-fx-background-color: #FFFEFD#FFFEFD;" text="Update Account" translateY="30.0">
+               <graphic>
+                  <ImageView fitHeight="26.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Imagenes/Usuario.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font name="AppleMyungjo Regular" size="13.0" />
+               </font>
+               <padding>
+                  <Insets left="24.0" />
+               </padding>
+            </Button>
+            <Button fx:id="ReserveRoom" alignment="BOTTOM_LEFT" graphicTextGap="18.0" mnemonicParsing="false" onAction="#ReserveRoom" prefHeight="46.0" prefWidth="213.0" style="-fx-background-color: #FFFEFD#FFFEFD;" text="Reserve room" translateY="30.0">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Imagenes/Reserva.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font name="AppleMyungjo Regular" size="13.0" />
+               </font>
+               <padding>
+                  <Insets left="30.0" />
+               </padding>
+            </Button>
+            <Button fx:id="iHistory" alignment="BOTTOM_LEFT" graphicTextGap="19.0" mnemonicParsing="false" onAction="#History" prefHeight="46.0" prefWidth="213.0" style="-fx-background-color: #FFFEFD#FFFEFD;" text="History" translateY="30.0">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Imagenes/Historial.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font name="AppleMyungjo Regular" size="13.0" />
+               </font>
+               <padding>
+                  <Insets left="30.0" />
+               </padding>
+            </Button>
+            <Button fx:id="InsertRoom" alignment="BOTTOM_LEFT" graphicTextGap="12.0" mnemonicParsing="false" onAction="#InsertRoom" prefHeight="46.0" prefWidth="220.0" style="-fx-background-color: #FFFEFD#FFFEFD;" text="Insert Room" translateY="30.0">
+               <font>
+                  <Font name="AppleMyungjo Regular" size="13.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="52.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Imagenes/Ayuda.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets bottom="-5.0" left="20.0" />
+               </padding>
+            </Button>
+            <Button fx:id="SingOut" alignment="BOTTOM_LEFT" graphicTextGap="18.0" mnemonicParsing="false" onAction="#SingOut" prefHeight="46.0" prefWidth="220.0" style="-fx-background-color: #FFFEFD#FFFEFD;" text="Sing Out" translateY="30.0">
+               <font>
+                  <Font name="AppleMyungjo Regular" size="13.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="31.0" fitWidth="40.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Imagenes/Salir.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets bottom="5.0" left="30.0" />
+               </padding>
+            </Button>
+            <ImageView fitHeight="305.0" fitWidth="212.0" pickOnBounds="true" preserveRatio="true" translateY="30.0">
+               <image>
+                  <Image url="@../Imagenes/UniBnB.png" />
+               </image>
+            </ImageView>
+         </children>
+      </VBox>
+      <Label layoutX="359.0" layoutY="21.0" text="RESERVE ROOM" textFill="WHITE">
+         <font>
+            <Font name="AppleMyungjo Regular" size="33.0" />
+         </font>
+      </Label>
+      <HBox layoutX="245.0" layoutY="91.0" prefHeight="36.0" prefWidth="478.0" style="-fx-background-color: #494580#494580; -fx-border-color: #755E3C #755E3C;">
+         <children>
+            <TextField prefHeight="38.0" prefWidth="168.0" promptText="Location" style="-fx-background-color: #4f4b80#4f4b80 #4f4b80#4f4b80;">
+               <font>
+                  <Font size="17.0" />
+               </font></TextField>
+            <TextField prefHeight="38.0" prefWidth="168.0" promptText="Check In" style="-fx-background-color: #4f4b80#4f4b80 #4f4b80#4f4b80;">
+               <font>
+                  <Font size="17.0" />
+               </font></TextField>
+            <TextField prefHeight="38.0" prefWidth="168.0" promptText="Check Out" style="-fx-background-color: #4f4b80#4f4b80 #4f4b80#4f4b80;">
+               <font>
+                  <Font size="17.0" />
+               </font></TextField>
+            <TextField prefHeight="38.0" prefWidth="168.0" promptText="Guests" style="-fx-background-color: #4f4b80#4f4b80 #4f4b80#4f4b80;">
+               <font>
+                  <Font size="17.0" />
+               </font></TextField>
+         </children>
+      </HBox>
+      <VBox fx:id="Items" layoutX="252.0" layoutY="164.0" prefHeight="36.0" prefWidth="478.0" />
+      <Button fx:id="butonPrueba" layoutX="663.0" layoutY="394.0" mnemonicParsing="false" onAction="#eventBotonPrueba" style="-fx-background-color: #755E3C #755E3C #755E3C #755E3C;" text="Accept">
+         <font>
+            <Font name="AppleMyungjo Regular" size="13.0" />
+         </font>
+      </Button>
+      <Label fx:id="Room2" layoutX="416.0" layoutY="132.0" text="Available rooms" textFill="WHITE" visible="false">
+         <font>
+            <Font name="AppleMyungjo Regular" size="20.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
