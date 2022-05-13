@@ -349,7 +349,7 @@ public class SignUp extends javax.swing.JFrame {
                     String Query;
                     Query= "insert into usuarios values ('"+name+"','"+email+"','"+password+"','"+Tipo+"')";
                     InsertUpdateDelete.setData(Query, "Welcome Aboard");
-                    setVisible(false);
+                   // setVisible(false);
                     new SignUp().setVisible(true);
                 }
     }//GEN-LAST:event_jButton2ActionPerformed
