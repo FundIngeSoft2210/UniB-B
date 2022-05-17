@@ -4,9 +4,11 @@
  */
 package View;
 
+import Model.Confirmation;
 import javax.swing.JOptionPane;
 import Model.InsertUpdateDelete;
-
+import Model.Encryption;
+import java.sql.ResultSet;
 public class SignUp extends javax.swing.JFrame {
 
     /**
@@ -346,9 +348,24 @@ public class SignUp extends javax.swing.JFrame {
                 if(name.equals("")||email.equals("")||password.equals("")){
                     JOptionPane.showMessageDialog(null, "OOPS! Te hizo falta un campo a completar!");
                 }else{
-                    String Query;
+                    String Query;           //falta verificar si usuario ya existe!! 
+            email=Encryption.Encrypti(email); //email estaran encryptados 
+            ResultSet rs=Confirmation.getData("select *from usuarios where email='"+email+"'");
+            try{
+             if(rs.next()){
+                 if(rs.getString(2)== email){
+                     JOptionPane.showMessageDialog(null,"There is already a user registered with this email");                   
+                 }
+             }
+            }
+            catch(Exception e){
+                JOptionPane.showMessageDialog(null,"OOPS! Vuelva verificar la información ingresada");
+            }
+                    name = Encryption.Encrypti(name);
+                    //email = Encryption.Encrypti(email); NO mas necesario 
+                    password = Encryption.Encrypti(password);
                     Query= "insert into usuarios values ('"+name+"','"+email+"','"+password+"','"+Tipo+"')";
-                    InsertUpdateDelete.setData(Query, "Welcome Aboard");
+                    InsertUpdateDelete.setData(Query, "Welcome! User registered with success ");
                     setVisible(false);
                     new SignUp().setVisible(true);
                 }
