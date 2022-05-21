@@ -273,18 +273,18 @@ public class Loggin extends javax.swing.JFrame {
             try{
              if(rs.next()){
                  if(rs.getInt(4)== 1){
-                     JOptionPane.showMessageDialog(null,"You r host");
+                     JOptionPane.showMessageDialog(null,"Welcome");
                      setVisible(false);
-                     new HostHome().setVisible(true);
+                     new Home().setVisible(true);
                  }else{
-                     JOptionPane.showMessageDialog(null,"You r guest");
+                     JOptionPane.showMessageDialog(null,"Welcome");
                      setVisible(false);
-                     new GuestHome().setVisible(true);
+                     new Home().setVisible(true);
                  }
              }
             }
             catch(Exception e){
-                JOptionPane.showMessageDialog(null,"OOPS! Vuelva verificar la información ingresada");
+                JOptionPane.showMessageDialog(null,"OOPS! Ningun correo asociado a la info ingresada");
             }
             
         }
