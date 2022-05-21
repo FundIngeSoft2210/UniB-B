@@ -7,6 +7,7 @@ package View;
 import javax.swing.JOptionPane;
 import java.sql.*;
 import Model.Confirmation;
+import Model.Encryption;
 
 /**
  *
@@ -264,8 +265,10 @@ public class Loggin extends javax.swing.JFrame {
         String email=jTextField2.getText();
         String password=jPasswordField1.getText();
         if(email.equals("")||password.equals(""))
-            JOptionPane.showMessageDialog(null, "OOPS! Te olvidó diligenciar una información importante");
+            JOptionPane.showMessageDialog(null, "OOPS! Te olvidó diligenciar un campo de información");
         else{
+           // email=Encryption.Encrypti(email);                   //NO DATA LEAK
+           // password = Encryption.Encrypti(password);            //NO DATA LEAK
             ResultSet rs=Confirmation.getData("select *from usuarios where email='"+email+"' and password='"+password+"'");
             try{
              if(rs.next()){
