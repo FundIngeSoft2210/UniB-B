@@ -11,17 +11,33 @@ package Model;
 public class Encryption {
     
     public static String Encrypti(String word){
+     
+      char[]s = word.toCharArray();
+      char n=5;
+     
+    for (int i = 0; i < word.length(); i++)
+    {
+ 
+        // Stores integer value of
+        // character in String N
+        int a = (int)(n) - '0';
+ 
+        // Stores ASCII value of
+        // character in String S
+        int b = (int)(s[i]) + a;
+ 
+        // If b exceeds 122
+        if (b > 122)
+            b -= 26;
+ 
+        // Replace the character
+        s[i] = (char)(b);
+    } 
         
-        char[] chars = word.toCharArray();
+        String encr = s.toString();
+        System.out.println("tryee: " + encr);
         
-        for (char c: chars ){
-            
-            c += 5; // Para el ejemplo esta encryptacion es muy basica, para el nuevo tipo de encripcion se agregaria un numero random a final del text y con ese de descriptaria. 
-        }
-        
-        String encrypted=chars.toString();
-        
-        return encrypted;
-    }
     
-}
+    return encr;
+    }}
+    

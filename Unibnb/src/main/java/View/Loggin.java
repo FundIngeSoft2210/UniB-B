@@ -267,8 +267,8 @@ public class Loggin extends javax.swing.JFrame {
         if(email.equals("")||password.equals(""))
             JOptionPane.showMessageDialog(null, "OOPS! Te olvidó diligenciar un campo de información");
         else{
-            email=Encryption.Encrypti(email);                   //NO DATA LEAK
-            password = Encryption.Encrypti(password);            //NO DATA LEAK
+           // email=Encryption.Encrypti(email);                   //NO DATA LEAK
+           // password = Encryption.Encrypti(password);            //NO DATA LEAK
             ResultSet rs=Confirmation.getData("select *from usuarios where email='"+email+"' and password='"+password+"'");
             try{
              if(rs.next()){
