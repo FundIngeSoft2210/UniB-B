@@ -15,6 +15,15 @@
                 </configuration>
             </plugin>
         </plugins>
+        
+        <resources>
+            <resource>
+                <directory>C:\Users\cuerv\Documents\GitHub\UniB-B\Unibnb\src\main\resources</directory>
+            </resource>
+        </resources>
+        
+        
+        
     </build>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

@@ -284,7 +284,7 @@ public class Loggin extends javax.swing.JFrame {
              }
             }
             catch(Exception e){
-                JOptionPane.showMessageDialog(null,"OOPS! Ningun correo asociado a la info ingresada");
+             //   JOptionPane.showMessageDialog(null,"OOPS! Ningun correo asociado a la info ingresada");
             }
             
         }
