@@ -4,7 +4,13 @@
  */
 package View;
 
+import Model.Confirmation;
+import Model.InsertUpdateDelete;
 import java.awt.Color;
+import java.sql.ResultSet;
+import java.util.*;
+import java.text.SimpleDateFormat;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -17,6 +23,8 @@ public class Home extends javax.swing.JFrame {
      */
     public Home() {
         initComponents();
+        inicio.setVisible(true);
+        jPNewReservation.setVisible(false);
     }
 
     /**
@@ -42,7 +50,19 @@ public class Home extends javax.swing.JFrame {
         jSeparator10 = new javax.swing.JSeparator();
         jSeparator11 = new javax.swing.JSeparator();
         jSeparator12 = new javax.swing.JSeparator();
-        jPanel2 = new javax.swing.JPanel();
+        contenido = new javax.swing.JPanel();
+        inicio = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jPNewReservation = new javax.swing.JPanel();
+        DataReservation = new javax.swing.JLabel();
+        fechaEntrada = new com.toedter.calendar.JDateChooser();
+        fechaSalida = new com.toedter.calendar.JDateChooser();
+        fechaE = new javax.swing.JLabel();
+        fechaS = new javax.swing.JLabel();
+        costoReserva = new javax.swing.JTextField();
+        tipoPago = new javax.swing.JComboBox<>();
+        hacerReserva = new javax.swing.JButton();
+        infoHabitacion = new javax.swing.JPanel();
 
         jSeparator7.setForeground(new java.awt.Color(255, 255, 255));
 
@@ -62,6 +82,9 @@ public class Home extends javax.swing.JFrame {
         jButton4.setSelected(true);
         jButton4.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/home.png"))); // NOI18N
         jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton4MouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jButton4MouseEntered(evt);
             }
@@ -103,6 +126,16 @@ public class Home extends javax.swing.JFrame {
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/calendar.png"))); // NOI18N
         jButton5.setBorderPainted(false);
         jButton5.setContentAreaFilled(false);
+        jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton5MouseClicked(evt);
+            }
+        });
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jSeparator10.setForeground(new java.awt.Color(255, 255, 255));
 
@@ -167,20 +200,156 @@ public class Home extends javax.swing.JFrame {
                 .addGap(44, 44, 44))
         );
 
-        jPanel2.setBackground(new java.awt.Color(36, 47, 65));
-        jPanel2.setDoubleBuffered(false);
-        jPanel2.setEnabled(false);
+        contenido.setBackground(new java.awt.Color(36, 47, 65));
+        contenido.setDoubleBuffered(false);
+        contenido.setEnabled(false);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 885, Short.MAX_VALUE)
+        inicio.setBackground(new java.awt.Color(36, 47, 65));
+        inicio.setDoubleBuffered(false);
+        inicio.setEnabled(false);
+
+        jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 36)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel2.setText("Menu");
+
+        javax.swing.GroupLayout inicioLayout = new javax.swing.GroupLayout(inicio);
+        inicio.setLayout(inicioLayout);
+        inicioLayout.setHorizontalGroup(
+            inicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(inicioLayout.createSequentialGroup()
+                .addGap(413, 413, 413)
+                .addComponent(jLabel2)
+                .addContainerGap(660, Short.MAX_VALUE))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 577, Short.MAX_VALUE)
+        inicioLayout.setVerticalGroup(
+            inicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(inicioLayout.createSequentialGroup()
+                .addGap(278, 278, 278)
+                .addComponent(jLabel2)
+                .addContainerGap(285, Short.MAX_VALUE))
         );
+
+        jPNewReservation.setBackground(new java.awt.Color(36, 47, 65));
+
+        DataReservation.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        DataReservation.setForeground(new java.awt.Color(204, 204, 204));
+        DataReservation.setText("Reservation");
+        DataReservation.setMaximumSize(new java.awt.Dimension(64, 23));
+        DataReservation.setMinimumSize(new java.awt.Dimension(64, 23));
+
+        fechaSalida.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+
+        fechaE.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        fechaE.setForeground(new java.awt.Color(204, 204, 204));
+        fechaE.setText("Entry Date");
+
+        fechaS.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        fechaS.setForeground(new java.awt.Color(204, 204, 204));
+        fechaS.setText("Departure Date");
+
+        costoReserva.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        costoReserva.setForeground(new java.awt.Color(204, 204, 204));
+        costoReserva.setText("Cost");
+        costoReserva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                costoReservaActionPerformed(evt);
+            }
+        });
+
+        tipoPago.setBackground(new java.awt.Color(204, 204, 204));
+        tipoPago.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        tipoPago.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cash", "Wire Transfer", "Check" }));
+        tipoPago.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tipoPagoActionPerformed(evt);
+            }
+        });
+
+        hacerReserva.setBackground(new java.awt.Color(97, 212, 195));
+        hacerReserva.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        hacerReserva.setText("Confirm");
+        hacerReserva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hacerReservaActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout infoHabitacionLayout = new javax.swing.GroupLayout(infoHabitacion);
+        infoHabitacion.setLayout(infoHabitacionLayout);
+        infoHabitacionLayout.setHorizontalGroup(
+            infoHabitacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 343, Short.MAX_VALUE)
+        );
+        infoHabitacionLayout.setVerticalGroup(
+            infoHabitacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 297, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPNewReservationLayout = new javax.swing.GroupLayout(jPNewReservation);
+        jPNewReservation.setLayout(jPNewReservationLayout);
+        jPNewReservationLayout.setHorizontalGroup(
+            jPNewReservationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPNewReservationLayout.createSequentialGroup()
+                .addGap(111, 111, 111)
+                .addGroup(jPNewReservationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPNewReservationLayout.createSequentialGroup()
+                        .addComponent(infoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 228, Short.MAX_VALUE)
+                        .addGroup(jPNewReservationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(hacerReserva)
+                            .addGroup(jPNewReservationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(fechaSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(fechaS)
+                                .addComponent(fechaE)
+                                .addComponent(fechaEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(costoReserva, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tipoPago, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(277, 277, 277))
+                    .addGroup(jPNewReservationLayout.createSequentialGroup()
+                        .addComponent(DataReservation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+        );
+        jPNewReservationLayout.setVerticalGroup(
+            jPNewReservationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPNewReservationLayout.createSequentialGroup()
+                .addGap(51, 51, 51)
+                .addComponent(DataReservation, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addComponent(fechaE)
+                .addGap(18, 18, 18)
+                .addGroup(jPNewReservationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPNewReservationLayout.createSequentialGroup()
+                        .addComponent(fechaEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(fechaS)
+                        .addGap(18, 18, 18)
+                        .addComponent(fechaSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(44, 44, 44)
+                        .addComponent(tipoPago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(55, 55, 55)
+                        .addComponent(costoReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(infoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
+                .addComponent(hacerReserva)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout contenidoLayout = new javax.swing.GroupLayout(contenido);
+        contenido.setLayout(contenidoLayout);
+        contenidoLayout.setHorizontalGroup(
+            contenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPNewReservation, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(contenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(inicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        contenidoLayout.setVerticalGroup(
+            contenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPNewReservation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(contenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(inicio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPNewReservation.getAccessibleContext().setAccessibleDescription("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -189,15 +358,13 @@ public class Home extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(contenido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 577, Short.MAX_VALUE)
+            .addComponent(contenido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -205,6 +372,9 @@ public class Home extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
+        inicio.setVisible(true);
+        jPNewReservation.setVisible(false);
+        
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseEntered
@@ -218,6 +388,67 @@ public class Home extends javax.swing.JFrame {
     private void jButton4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton4KeyPressed
        jButton4.setBackground(Color.red); // TODO add your handling code here:
     }//GEN-LAST:event_jButton4KeyPressed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        jPNewReservation.setVisible(true);
+        inicio.setVisible(false);
+        
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void costoReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_costoReservaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_costoReservaActionPerformed
+
+    private void tipoPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoPagoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tipoPagoActionPerformed
+
+    private void hacerReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hacerReservaActionPerformed
+        // TODO add your handling code here:
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd-mm-yyyy");
+        String fEntrada = formatoFecha.format(fechaEntrada.getDate());
+        String fSalida = formatoFecha.format(fechaSalida.getDate());
+        String pago=tipoPago.getSelectedItem().toString();
+        String costo = costoReserva.getText();
+        String emailU = Loggin.emailUser.getText();
+        //Crea un identificador unico para la reserva
+        String idReserva = UUID.randomUUID().toString();
+        //También, luego de tener habitación se puede buscar con el identificador de la habitación
+        ResultSet resultQ=Confirmation.getData("select *from reserva where idUsuario='"+emailU+"'");
+        //Esta consulta serviría con el identificador de la reserva para confirmar la disponibilidad
+        //ResultSet resultQ=Confirmation.getData("select *from habitacion where estadoH='"+estado+"'");
+        try{
+             if(resultQ.next()){
+                 if(resultQ.getString(1).equals(emailU)){// aquí compararía con el estado de la habitación
+                     JOptionPane.showMessageDialog(null," There is already a reservation on this property");                   
+                 }else{
+                     String Query;
+                     //name = Encryption.Encrypti(name);
+                    //email = Encryption.Encrypti(email); NO mas necesario 
+                  //  password = Encryption.Encrypti(password);
+                  // Esta es por el momento
+                    Query= "insert into reserva values ('"+idReserva+"','"+emailU+"','"+fEntrada+"','"+fSalida+"','"+pago+"','"+costo+"')";
+                  //Esta sería con los datos de la habitación a reservar
+                  //Query= "insert into reserva values ('"+idReserva+"','"+emailU+"','"+idHabitacion+"','"+fEntrada+"','"+fSalida+"','"+pago+"','"+costo+"')";
+                    InsertUpdateDelete.setData(Query, " Successful booking! ");
+                      
+                 }
+             }
+            }
+            catch(Exception e){
+                JOptionPane.showMessageDialog(null,"OOPS! Vuelva verificar la información ingresada");
+            }
+    }//GEN-LAST:event_hacerReservaActionPerformed
+
+    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jButton4MouseClicked
+
+    private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5MouseClicked
 
     /**
      * @param args the command line arguments
@@ -256,6 +487,16 @@ public class Home extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel DataReservation;
+    private javax.swing.JPanel contenido;
+    private javax.swing.JTextField costoReserva;
+    private javax.swing.JLabel fechaE;
+    private com.toedter.calendar.JDateChooser fechaEntrada;
+    private javax.swing.JLabel fechaS;
+    private com.toedter.calendar.JDateChooser fechaSalida;
+    private javax.swing.JButton hacerReserva;
+    private javax.swing.JPanel infoHabitacion;
+    private javax.swing.JPanel inicio;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
@@ -263,13 +504,15 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPNewReservation;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator10;
     private javax.swing.JSeparator jSeparator11;
     private javax.swing.JSeparator jSeparator12;
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSeparator jSeparator9;
+    private javax.swing.JComboBox<String> tipoPago;
     // End of variables declaration//GEN-END:variables
 }
