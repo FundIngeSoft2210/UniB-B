@@ -540,6 +540,8 @@ public class Home extends javax.swing.JFrame {
         jPHistoryBooking.setVisible(true);
         inicio.setVisible(false);
         jPNewReservation.setVisible(false);
+        String emailUsuario = Loggin.emailUser.getText();
+        ResultSet historyH=Confirmation.getData("select *from reserva where idUsuario='"+emailUsuario+"'");
     }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
