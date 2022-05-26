@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.util.*;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
+import javax.swing.SpinnerNumberModel;
 
 /**
  *
@@ -59,10 +60,14 @@ public class Home extends javax.swing.JFrame {
         fechaSalida = new com.toedter.calendar.JDateChooser();
         fechaE = new javax.swing.JLabel();
         fechaS = new javax.swing.JLabel();
-        costoReserva = new javax.swing.JTextField();
+        costoT = new javax.swing.JTextField();
         tipoPago = new javax.swing.JComboBox<>();
         hacerReserva = new javax.swing.JButton();
         infoHabitacion = new javax.swing.JPanel();
+        LmedioPago = new javax.swing.JLabel();
+        LcantidadH = new javax.swing.JLabel();
+        cantidadHuespedes = new javax.swing.JSpinner();
+        costoTReserva = new javax.swing.JLabel();
 
         jSeparator7.setForeground(new java.awt.Color(255, 255, 255));
 
@@ -176,7 +181,7 @@ public class Home extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
-                .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -189,7 +194,7 @@ public class Home extends javax.swing.JFrame {
                 .addComponent(jSeparator10, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(8, 8, 8)
                 .addComponent(jButton7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addComponent(jSeparator11, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton8)
@@ -203,10 +208,12 @@ public class Home extends javax.swing.JFrame {
         contenido.setBackground(new java.awt.Color(36, 47, 65));
         contenido.setDoubleBuffered(false);
         contenido.setEnabled(false);
+        contenido.setPreferredSize(new java.awt.Dimension(1005, 608));
 
         inicio.setBackground(new java.awt.Color(36, 47, 65));
         inicio.setDoubleBuffered(false);
         inicio.setEnabled(false);
+        inicio.setPreferredSize(new java.awt.Dimension(1005, 608));
 
         jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(204, 204, 204));
@@ -219,7 +226,7 @@ public class Home extends javax.swing.JFrame {
             .addGroup(inicioLayout.createSequentialGroup()
                 .addGap(413, 413, 413)
                 .addComponent(jLabel2)
-                .addContainerGap(660, Short.MAX_VALUE))
+                .addContainerGap(662, Short.MAX_VALUE))
         );
         inicioLayout.setVerticalGroup(
             inicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -230,6 +237,7 @@ public class Home extends javax.swing.JFrame {
         );
 
         jPNewReservation.setBackground(new java.awt.Color(36, 47, 65));
+        jPNewReservation.setPreferredSize(new java.awt.Dimension(1005, 608));
 
         DataReservation.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         DataReservation.setForeground(new java.awt.Color(204, 204, 204));
@@ -247,12 +255,12 @@ public class Home extends javax.swing.JFrame {
         fechaS.setForeground(new java.awt.Color(204, 204, 204));
         fechaS.setText("Departure Date");
 
-        costoReserva.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        costoReserva.setForeground(new java.awt.Color(204, 204, 204));
-        costoReserva.setText("Cost");
-        costoReserva.addActionListener(new java.awt.event.ActionListener() {
+        costoT.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        costoT.setForeground(new java.awt.Color(204, 204, 204));
+        costoT.setText("Cost");
+        costoT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                costoReservaActionPerformed(evt);
+                costoTActionPerformed(evt);
             }
         });
 
@@ -285,6 +293,25 @@ public class Home extends javax.swing.JFrame {
             .addGap(0, 297, Short.MAX_VALUE)
         );
 
+        LmedioPago.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        LmedioPago.setForeground(new java.awt.Color(204, 204, 204));
+        LmedioPago.setText("Medio de Pago");
+
+        LcantidadH.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        LcantidadH.setForeground(new java.awt.Color(204, 204, 204));
+        LcantidadH.setText("Cantidad de Huéspedes");
+
+        cantidadHuespedes.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        cantidadHuespedes.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                cantidadHuespedesStateChanged(evt);
+            }
+        });
+
+        costoTReserva.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        costoTReserva.setForeground(new java.awt.Color(204, 204, 204));
+        costoTReserva.setText("Total Cost");
+
         javax.swing.GroupLayout jPNewReservationLayout = new javax.swing.GroupLayout(jPNewReservation);
         jPNewReservation.setLayout(jPNewReservationLayout);
         jPNewReservationLayout.setHorizontalGroup(
@@ -293,45 +320,62 @@ public class Home extends javax.swing.JFrame {
                 .addGap(111, 111, 111)
                 .addGroup(jPNewReservationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPNewReservationLayout.createSequentialGroup()
-                        .addComponent(infoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 228, Short.MAX_VALUE)
-                        .addGroup(jPNewReservationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(hacerReserva)
-                            .addGroup(jPNewReservationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(fechaSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(fechaS)
-                                .addComponent(fechaE)
-                                .addComponent(fechaEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(costoReserva, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tipoPago, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(277, 277, 277))
-                    .addGroup(jPNewReservationLayout.createSequentialGroup()
                         .addComponent(DataReservation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPNewReservationLayout.createSequentialGroup()
+                        .addComponent(infoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(jPNewReservationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPNewReservationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(cantidadHuespedes, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPNewReservationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(LmedioPago)
+                            .addGroup(jPNewReservationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(jPNewReservationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(fechaSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(fechaE)
+                                    .addComponent(fechaEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(tipoPago, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(costoTReserva)
+                            .addComponent(LcantidadH)
+                            .addGroup(jPNewReservationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(hacerReserva)
+                                .addComponent(costoT, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(fechaS))
+                .addGap(150, 150, 150))
         );
         jPNewReservationLayout.setVerticalGroup(
             jPNewReservationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPNewReservationLayout.createSequentialGroup()
                 .addGap(51, 51, 51)
-                .addComponent(DataReservation, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
-                .addComponent(fechaE)
-                .addGap(18, 18, 18)
                 .addGroup(jPNewReservationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPNewReservationLayout.createSequentialGroup()
+                        .addComponent(fechaE)
+                        .addGap(18, 18, 18)
                         .addComponent(fechaEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(fechaS)
                         .addGap(18, 18, 18)
                         .addComponent(fechaSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(44, 44, 44)
+                        .addGap(18, 18, 18)
+                        .addComponent(LmedioPago)
+                        .addGap(18, 18, 18)
                         .addComponent(tipoPago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(55, 55, 55)
-                        .addComponent(costoReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(infoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
-                .addComponent(hacerReserva)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(LcantidadH)
+                        .addGap(18, 18, 18)
+                        .addComponent(cantidadHuespedes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(costoTReserva)
+                        .addGap(18, 18, 18)
+                        .addComponent(costoT, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33)
+                        .addComponent(hacerReserva))
+                    .addGroup(jPNewReservationLayout.createSequentialGroup()
+                        .addComponent(DataReservation, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(70, 70, 70)
+                        .addComponent(infoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout contenidoLayout = new javax.swing.GroupLayout(contenido);
@@ -363,7 +407,7 @@ public class Home extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 577, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(contenido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -393,12 +437,16 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
         jPNewReservation.setVisible(true);
         inicio.setVisible(false);
+        SpinnerNumberModel nm = new SpinnerNumberModel();
+        nm.setMaximum(10);
+        nm.setMinimum(0);
+        cantidadHuespedes.setModel(nm);
         
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void costoReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_costoReservaActionPerformed
+    private void costoTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_costoTActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_costoReservaActionPerformed
+    }//GEN-LAST:event_costoTActionPerformed
 
     private void tipoPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoPagoActionPerformed
         // TODO add your handling code here:
@@ -410,8 +458,9 @@ public class Home extends javax.swing.JFrame {
         String fEntrada = formatoFecha.format(fechaEntrada.getDate());
         String fSalida = formatoFecha.format(fechaSalida.getDate());
         String pago=tipoPago.getSelectedItem().toString();
-        String costo = costoReserva.getText();
+        String costo = costoT.getText();
         String emailU = Loggin.emailUser.getText();
+        String cantidadHuesped = cantidadHuespedes.getValue().toString();
         //Crea un identificador unico para la reserva
         String idReserva = UUID.randomUUID().toString();
         //También, luego de tener habitación se puede buscar con el identificador de la habitación
@@ -428,7 +477,7 @@ public class Home extends javax.swing.JFrame {
                     //email = Encryption.Encrypti(email); NO mas necesario 
                   //  password = Encryption.Encrypti(password);
                   // Esta es por el momento
-                    Query= "insert into reserva values ('"+idReserva+"','"+emailU+"','"+fEntrada+"','"+fSalida+"','"+pago+"','"+costo+"')";
+                    Query= "insert into reserva values ('"+idReserva+"','"+emailU+"','"+fEntrada+"','"+fSalida+"','"+cantidadHuesped+"','"+pago+"','"+costo+"')";
                   //Esta sería con los datos de la habitación a reservar
                   //Query= "insert into reserva values ('"+idReserva+"','"+emailU+"','"+idHabitacion+"','"+fEntrada+"','"+fSalida+"','"+pago+"','"+costo+"')";
                     InsertUpdateDelete.setData(Query, " Successful booking! ");
@@ -449,6 +498,10 @@ public class Home extends javax.swing.JFrame {
     private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton5MouseClicked
+
+    private void cantidadHuespedesStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_cantidadHuespedesStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cantidadHuespedesStateChanged
 
     /**
      * @param args the command line arguments
@@ -488,8 +541,12 @@ public class Home extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel DataReservation;
+    private javax.swing.JLabel LcantidadH;
+    private javax.swing.JLabel LmedioPago;
+    private javax.swing.JSpinner cantidadHuespedes;
     private javax.swing.JPanel contenido;
-    private javax.swing.JTextField costoReserva;
+    private javax.swing.JTextField costoT;
+    private javax.swing.JLabel costoTReserva;
     private javax.swing.JLabel fechaE;
     private com.toedter.calendar.JDateChooser fechaEntrada;
     private javax.swing.JLabel fechaS;
