@@ -26,6 +26,7 @@ public class Home extends javax.swing.JFrame {
         initComponents();
         inicio.setVisible(true);
         jPNewReservation.setVisible(false);
+        jPHistoryBooking.setVisible(false);
     }
 
     /**
@@ -57,7 +58,6 @@ public class Home extends javax.swing.JFrame {
         jPNewReservation = new javax.swing.JPanel();
         DataReservation = new javax.swing.JLabel();
         fechaEntrada = new com.toedter.calendar.JDateChooser();
-        fechaSalida = new com.toedter.calendar.JDateChooser();
         fechaE = new javax.swing.JLabel();
         fechaS = new javax.swing.JLabel();
         costoT = new javax.swing.JTextField();
@@ -68,11 +68,14 @@ public class Home extends javax.swing.JFrame {
         LcantidadH = new javax.swing.JLabel();
         cantidadHuespedes = new javax.swing.JSpinner();
         costoTReserva = new javax.swing.JLabel();
+        fechaSalida = new com.toedter.calendar.JDateChooser();
+        jPHistoryBooking = new javax.swing.JPanel();
 
         jSeparator7.setForeground(new java.awt.Color(255, 255, 255));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(36, 47, 65));
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(97, 212, 195));
 
@@ -111,6 +114,11 @@ public class Home extends javax.swing.JFrame {
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/history.png"))); // NOI18N
         jButton6.setBorderPainted(false);
         jButton6.setContentAreaFilled(false);
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/search.png"))); // NOI18N
         jButton7.setBorderPainted(false);
@@ -226,7 +234,7 @@ public class Home extends javax.swing.JFrame {
             .addGroup(inicioLayout.createSequentialGroup()
                 .addGap(413, 413, 413)
                 .addComponent(jLabel2)
-                .addContainerGap(662, Short.MAX_VALUE))
+                .addContainerGap(492, Short.MAX_VALUE))
         );
         inicioLayout.setVerticalGroup(
             inicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -245,7 +253,7 @@ public class Home extends javax.swing.JFrame {
         DataReservation.setMaximumSize(new java.awt.Dimension(64, 23));
         DataReservation.setMinimumSize(new java.awt.Dimension(64, 23));
 
-        fechaSalida.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        fechaEntrada.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
 
         fechaE.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         fechaE.setForeground(new java.awt.Color(204, 204, 204));
@@ -312,6 +320,8 @@ public class Home extends javax.swing.JFrame {
         costoTReserva.setForeground(new java.awt.Color(204, 204, 204));
         costoTReserva.setText("Total Cost");
 
+        fechaSalida.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+
         javax.swing.GroupLayout jPNewReservationLayout = new javax.swing.GroupLayout(jPNewReservation);
         jPNewReservation.setLayout(jPNewReservationLayout);
         jPNewReservationLayout.setHorizontalGroup(
@@ -330,19 +340,22 @@ public class Home extends javax.swing.JFrame {
                         .addComponent(cantidadHuespedes, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPNewReservationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(LmedioPago)
-                            .addGroup(jPNewReservationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(jPNewReservationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(fechaSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(fechaE)
-                                    .addComponent(fechaEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(tipoPago, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(costoTReserva)
                             .addComponent(LcantidadH)
                             .addGroup(jPNewReservationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(hacerReserva)
-                                .addComponent(costoT, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(fechaS))
-                .addGap(150, 150, 150))
+                                .addComponent(costoT, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPNewReservationLayout.createSequentialGroup()
+                                .addGap(4, 4, 4)
+                                .addGroup(jPNewReservationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPNewReservationLayout.createSequentialGroup()
+                                        .addComponent(fechaE)
+                                        .addGap(121, 121, 121))
+                                    .addComponent(tipoPago, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addComponent(fechaS)
+                    .addComponent(fechaSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(fechaEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(153, 153, 153))
         );
         jPNewReservationLayout.setVerticalGroup(
             jPNewReservationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -375,7 +388,20 @@ public class Home extends javax.swing.JFrame {
                         .addComponent(DataReservation, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(70, 70, 70)
                         .addComponent(infoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPHistoryBooking.setBackground(new java.awt.Color(36, 47, 65));
+
+        javax.swing.GroupLayout jPHistoryBookingLayout = new javax.swing.GroupLayout(jPHistoryBooking);
+        jPHistoryBooking.setLayout(jPHistoryBookingLayout);
+        jPHistoryBookingLayout.setHorizontalGroup(
+            jPHistoryBookingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1005, Short.MAX_VALUE)
+        );
+        jPHistoryBookingLayout.setVerticalGroup(
+            jPHistoryBookingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 608, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout contenidoLayout = new javax.swing.GroupLayout(contenido);
@@ -385,12 +411,16 @@ public class Home extends javax.swing.JFrame {
             .addComponent(jPNewReservation, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(contenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(inicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(contenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jPHistoryBooking, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         contenidoLayout.setVerticalGroup(
             contenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPNewReservation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(contenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(inicio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(contenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jPHistoryBooking, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPNewReservation.getAccessibleContext().setAccessibleDescription("");
@@ -418,6 +448,7 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
         inicio.setVisible(true);
         jPNewReservation.setVisible(false);
+        jPHistoryBooking.setVisible(false);
         
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -437,6 +468,7 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
         jPNewReservation.setVisible(true);
         inicio.setVisible(false);
+        jPHistoryBooking.setVisible(false);
         SpinnerNumberModel nm = new SpinnerNumberModel();
         nm.setMaximum(10);
         nm.setMinimum(0);
@@ -503,6 +535,13 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cantidadHuespedesStateChanged
 
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        jPHistoryBooking.setVisible(true);
+        inicio.setVisible(false);
+        jPNewReservation.setVisible(false);
+    }//GEN-LAST:event_jButton6ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -562,6 +601,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPHistoryBooking;
     private javax.swing.JPanel jPNewReservation;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator10;
