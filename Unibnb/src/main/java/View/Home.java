@@ -7,11 +7,17 @@ package View;
 import Model.Confirmation;
 import Model.InsertUpdateDelete;
 import java.awt.Color;
+import java.awt.Image;
+import java.io.File;
 import java.sql.ResultSet;
 import java.util.*;
 import java.text.SimpleDateFormat;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -24,7 +30,9 @@ public class Home extends javax.swing.JFrame {
      */
     public Home() {
         initComponents();
+        
         inicio.setVisible(true);
+        jPNewRoom.setVisible(false);
         jPNewReservation.setVisible(false);
         jPHistoryBooking.setVisible(false);
     }
@@ -70,6 +78,15 @@ public class Home extends javax.swing.JFrame {
         costoTReserva = new javax.swing.JLabel();
         fechaSalida = new com.toedter.calendar.JDateChooser();
         jPHistoryBooking = new javax.swing.JPanel();
+        jPNewRoom = new javax.swing.JPanel();
+        addImagen = new javax.swing.JButton();
+        vistaImagen = new javax.swing.JLabel();
+        ubicacionH = new javax.swing.JTextField();
+        descripcionH = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         jSeparator7.setForeground(new java.awt.Color(255, 255, 255));
 
@@ -127,6 +144,11 @@ public class Home extends javax.swing.JFrame {
         jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/setting-lines.png"))); // NOI18N
         jButton8.setBorderPainted(false);
         jButton8.setContentAreaFilled(false);
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
 
         jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/setting.png"))); // NOI18N
         jButton9.setBorderPainted(false);
@@ -283,6 +305,7 @@ public class Home extends javax.swing.JFrame {
 
         hacerReserva.setBackground(new java.awt.Color(97, 212, 195));
         hacerReserva.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        hacerReserva.setForeground(new java.awt.Color(255, 255, 255));
         hacerReserva.setText("Confirm");
         hacerReserva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -303,11 +326,11 @@ public class Home extends javax.swing.JFrame {
 
         LmedioPago.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         LmedioPago.setForeground(new java.awt.Color(204, 204, 204));
-        LmedioPago.setText("Medio de Pago");
+        LmedioPago.setText("Payment Method");
 
         LcantidadH.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         LcantidadH.setForeground(new java.awt.Color(204, 204, 204));
-        LcantidadH.setText("Cantidad de Huéspedes");
+        LcantidadH.setText("Number of Guests");
 
         cantidadHuespedes.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         cantidadHuespedes.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -329,12 +352,9 @@ public class Home extends javax.swing.JFrame {
             .addGroup(jPNewReservationLayout.createSequentialGroup()
                 .addGap(111, 111, 111)
                 .addGroup(jPNewReservationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPNewReservationLayout.createSequentialGroup()
-                        .addComponent(DataReservation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPNewReservationLayout.createSequentialGroup()
-                        .addComponent(infoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(DataReservation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(infoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 180, Short.MAX_VALUE)
                 .addGroup(jPNewReservationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPNewReservationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(cantidadHuespedes, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -388,7 +408,7 @@ public class Home extends javax.swing.JFrame {
                         .addComponent(DataReservation, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(70, 70, 70)
                         .addComponent(infoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(83, Short.MAX_VALUE))
         );
 
         jPHistoryBooking.setBackground(new java.awt.Color(36, 47, 65));
@@ -404,6 +424,109 @@ public class Home extends javax.swing.JFrame {
             .addGap(0, 608, Short.MAX_VALUE)
         );
 
+        jPNewRoom.setBackground(new java.awt.Color(36, 47, 65));
+
+        addImagen.setBackground(new java.awt.Color(97, 212, 195));
+        addImagen.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        addImagen.setForeground(new java.awt.Color(204, 204, 204));
+        addImagen.setText("Add Image");
+        addImagen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addImagenActionPerformed(evt);
+            }
+        });
+
+        vistaImagen.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        vistaImagen.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        ubicacionH.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        ubicacionH.setForeground(new java.awt.Color(204, 204, 204));
+        ubicacionH.setText("Enter location");
+
+        descripcionH.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        descripcionH.setForeground(new java.awt.Color(204, 204, 204));
+        descripcionH.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        descripcionH.setText("Enter room description");
+        descripcionH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                descripcionHActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel3.setText("Add Room");
+
+        jLabel4.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel4.setText("Location");
+
+        jLabel5.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel5.setText("Description");
+
+        jButton1.setBackground(new java.awt.Color(97, 212, 195));
+        jButton1.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(204, 204, 204));
+        jButton1.setText("Add");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPNewRoomLayout = new javax.swing.GroupLayout(jPNewRoom);
+        jPNewRoom.setLayout(jPNewRoomLayout);
+        jPNewRoomLayout.setHorizontalGroup(
+            jPNewRoomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPNewRoomLayout.createSequentialGroup()
+                .addGroup(jPNewRoomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPNewRoomLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel4))
+                    .addGroup(jPNewRoomLayout.createSequentialGroup()
+                        .addGroup(jPNewRoomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPNewRoomLayout.createSequentialGroup()
+                                .addGap(115, 115, 115)
+                                .addGroup(jPNewRoomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(vistaImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPNewRoomLayout.createSequentialGroup()
+                                .addGap(236, 236, 236)
+                                .addComponent(addImagen)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 181, Short.MAX_VALUE)
+                        .addGroup(jPNewRoomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ubicacionH, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(descripcionH, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING))))
+                .addGap(122, 122, 122))
+        );
+        jPNewRoomLayout.setVerticalGroup(
+            jPNewRoomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPNewRoomLayout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addComponent(jLabel3)
+                .addGap(12, 12, 12)
+                .addComponent(jLabel4)
+                .addGap(32, 32, 32)
+                .addGroup(jPNewRoomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPNewRoomLayout.createSequentialGroup()
+                        .addComponent(vistaImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(addImagen)
+                        .addContainerGap(67, Short.MAX_VALUE))
+                    .addGroup(jPNewRoomLayout.createSequentialGroup()
+                        .addComponent(ubicacionH, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34)
+                        .addComponent(jLabel5)
+                        .addGap(18, 18, 18)
+                        .addComponent(descripcionH, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(75, 75, 75))))
+        );
+
         javax.swing.GroupLayout contenidoLayout = new javax.swing.GroupLayout(contenido);
         contenido.setLayout(contenidoLayout);
         contenidoLayout.setHorizontalGroup(
@@ -413,6 +536,8 @@ public class Home extends javax.swing.JFrame {
                 .addComponent(inicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(contenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPHistoryBooking, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(contenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jPNewRoom, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         contenidoLayout.setVerticalGroup(
             contenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -421,6 +546,8 @@ public class Home extends javax.swing.JFrame {
                 .addComponent(inicio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(contenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPHistoryBooking, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(contenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jPNewRoom, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPNewReservation.getAccessibleContext().setAccessibleDescription("");
@@ -447,6 +574,7 @@ public class Home extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         inicio.setVisible(true);
+        jPNewRoom.setVisible(false);
         jPNewReservation.setVisible(false);
         jPHistoryBooking.setVisible(false);
         
@@ -469,6 +597,7 @@ public class Home extends javax.swing.JFrame {
         jPNewReservation.setVisible(true);
         inicio.setVisible(false);
         jPHistoryBooking.setVisible(false);
+        jPNewRoom.setVisible(false);
         SpinnerNumberModel nm = new SpinnerNumberModel();
         nm.setMaximum(10);
         nm.setMinimum(0);
@@ -539,10 +668,56 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
         jPHistoryBooking.setVisible(true);
         inicio.setVisible(false);
+        jPNewRoom.setVisible(false);
         jPNewReservation.setVisible(false);
-        String emailUsuario = Loggin.emailUser.getText();
-        ResultSet historyH=Confirmation.getData("select *from reserva where idUsuario='"+emailUsuario+"'");
+        //String emailUsuario = Loggin.emailUser.getText();
+        //ResultSet historyH=Confirmation.getData("select *from reserva where idUsuario='"+emailUsuario+"'");
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    File archivoImagen;
+    private void addImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addImagenActionPerformed
+        // TODO add your handling code here:
+        int resultado;
+        SelectImage imagenS = new SelectImage();
+        
+        FileNameExtensionFilter formato = new FileNameExtensionFilter("JPG, PNG y GIF", "jpg", "png", "gif");
+        
+        imagenS.cargarImagen.setFileFilter(formato);
+        
+        resultado = imagenS.cargarImagen.showOpenDialog(null);
+        
+        if(JFileChooser.APPROVE_OPTION == resultado){
+            archivoImagen = imagenS.cargarImagen.getSelectedFile();
+            
+            try{
+                ImageIcon imagen = new ImageIcon(archivoImagen.toString());
+                Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(vistaImagen.getWidth(), vistaImagen.getHeight(), Image.SCALE_DEFAULT));
+                
+                vistaImagen.setIcon(icono);
+                
+            }catch (Exception e){
+                JOptionPane.showMessageDialog(null, "Error al abrir: "+e);
+            }
+        }
+    }//GEN-LAST:event_addImagenActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        // TODO add your handling code here:
+        jPNewRoom.setVisible(true);
+        inicio.setVisible(false);
+        jPNewReservation.setVisible(false);
+        jPHistoryBooking.setVisible(false);
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void descripcionHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descripcionHActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_descripcionHActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        String ubicacionHabitacion = ubicacionH.getText();
+        String descripcionHabitacion = descripcionH.getText();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -584,10 +759,12 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel DataReservation;
     private javax.swing.JLabel LcantidadH;
     private javax.swing.JLabel LmedioPago;
+    private javax.swing.JButton addImagen;
     private javax.swing.JSpinner cantidadHuespedes;
     private javax.swing.JPanel contenido;
     private javax.swing.JTextField costoT;
     private javax.swing.JLabel costoTReserva;
+    private javax.swing.JTextField descripcionH;
     private javax.swing.JLabel fechaE;
     private com.toedter.calendar.JDateChooser fechaEntrada;
     private javax.swing.JLabel fechaS;
@@ -595,6 +772,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton hacerReserva;
     private javax.swing.JPanel infoHabitacion;
     private javax.swing.JPanel inicio;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
@@ -603,8 +781,12 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPHistoryBooking;
     private javax.swing.JPanel jPNewReservation;
+    private javax.swing.JPanel jPNewRoom;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator10;
     private javax.swing.JSeparator jSeparator11;
@@ -613,5 +795,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSeparator jSeparator9;
     private javax.swing.JComboBox<String> tipoPago;
+    private javax.swing.JTextField ubicacionH;
+    private javax.swing.JLabel vistaImagen;
     // End of variables declaration//GEN-END:variables
 }
